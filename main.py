@@ -4,6 +4,7 @@ from tkinter.ttk import *
 from PIL import ImageTk, Image
 from tkinter import PhotoImage
 import image_detection as img_d
+import live_detection as live_d
 
 MIN_WINDOW_DIMENSION = '900x900'
 
@@ -31,7 +32,7 @@ def open_image_detection():
 
 
 def open_live_detection():
-    # live_d.start_live_detection()
+    live_d.start_live_detection()
     print('live detection started')
 
 

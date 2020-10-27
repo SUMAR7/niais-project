@@ -1,12 +1,14 @@
-import cv2
 import numpy as np
 from skimage.filters import threshold_local
 import tensorflow as tf
 from skimage import measure
 import imutils
+import cv2
 import os
+import pandas as pd
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+owners = pd.read_csv('/home/sajjad/PycharmProjects/niais-project/assets/datasets/owners.csv', sep=",")
 
 
 def sort_cont(character_contours):
@@ -304,7 +306,7 @@ class NeuralNetwork:
         return plate, len(plate)
 
 
-if __name__ == "__main__":
+def start_live_detection():
     findPlate = PlateFinder()
 
     # Initialize the Neural Network
@@ -325,6 +327,9 @@ if __name__ == "__main__":
                     recognized_plate, _ = model.label_image_list(chars_on_plate, imageSizeOuput=128)
                     print(recognized_plate)
                     cv2.imshow('plate', p)
+                    details = owners[owners["RegistrationNo"] == recognized_plate]
+                    if not details.empty:
+                        cv2.imshow(f"{details['Name'].values[0]}", cv2.imread(f"{details['Image'].values[0]}"))
                     if cv2.waitKey(25) & 0xFF == ord('q'):
                         break
         else:

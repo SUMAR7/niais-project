@@ -1,12 +1,12 @@
+import cv2
 from tkinter import filedialog
 from tkinter import *
 from PIL import ImageTk, Image
 import numpy as np
-import cv2
 import pytesseract as tess
 import pandas as pd
 
-owners = pd.read_csv('/home/sajjad/PycharmProjects/number-plates-detection/assets/datasets/owners.csv', sep=",")
+owners = pd.read_csv('/home/sajjad/PycharmProjects/niais-project/assets/datasets/owners.csv', sep=",")
 
 
 def clean2_plate(plate):
@@ -166,7 +166,7 @@ def show_classify_button(top, file_path):
 def upload_image(top, image_label):
     try:
         file_path = filedialog.askopenfilename(
-            initialdir='/home/sajjad/PycharmProjects/number-plates-detection/assets/test_samples')
+            initialdir='/home/sajjad/PycharmProjects/niais-project/assets/test_samples')
         uploaded = Image.open(file_path)
         im = ImageTk.PhotoImage(uploaded.resize((512, 512), Image.ANTIALIAS))
         image_label.configure(image=im)
